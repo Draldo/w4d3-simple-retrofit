@@ -8,12 +8,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.admin.simpleretrofit.entities.Student;
 import com.example.admin.simpleretrofit.network.NamesInterface;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -22,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> mArray;
+    private ArrayList<String> mImages;
     private simpleAdapter mAdapter;
     private RecyclerView mRecycler;
 
@@ -42,22 +40,23 @@ public class MainActivity extends AppCompatActivity {
         NamesInterface namesInterface = retrofit.create(NamesInterface.class);
 
         //5. Setting up the method to be called from the intervace
-        Call<ArrayList<Student>> studentCall = namesInterface.retrieveStudents();
+        Call<ArrayList<Student>> studentCall = namesInterface.retrieveStudentsImages();
 
         mArray = new ArrayList<String>();
+        mImages = new ArrayList<String>();
         try {
             //6.Executing the Retrofit call
             ArrayList<Student> students = studentCall.execute().body();
             for (Student student :
                     students) {
-                System.out.println(student);
-                mArray.add(student.toString());
+                mArray.add(student.getName());
+                mImages.add(student.getImage());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        mAdapter = new simpleAdapter(getApplicationContext(),mArray);
+        mAdapter = new simpleAdapter(getApplicationContext(),mArray, mImages);
 
         mRecycler = (RecyclerView) findViewById(R.id.a_main_recycler);
         mRecycler.setAdapter(mAdapter);

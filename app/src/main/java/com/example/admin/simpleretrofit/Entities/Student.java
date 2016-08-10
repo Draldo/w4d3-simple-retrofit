@@ -18,6 +18,9 @@ public class Student {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
     /**
      * 
@@ -91,6 +94,24 @@ public class Student {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     *     The image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     *
+     * @param image
+     *     The image
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -98,6 +119,7 @@ public class Student {
                 ", age=" + age +
                 ", grade=" + grade +
                 ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

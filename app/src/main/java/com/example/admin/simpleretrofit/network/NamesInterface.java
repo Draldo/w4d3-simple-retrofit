@@ -16,4 +16,7 @@ public interface NamesInterface {
 
     @GET("/v2/57a4dfb40f0000821dc9a3b8")
     Call<ArrayList<Student>> retrieveStudents();
+
+    @GET("/v2/57ab9e0d120000cd2273b6db")
+    Call<ArrayList<Student>> retrieveStudentsImages();
 }
